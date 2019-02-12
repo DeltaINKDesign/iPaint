@@ -22,7 +22,9 @@ namespace iPaint
             InitializeComponent();
             panel1.BackColor = Color.White;
             g = panel1.CreateGraphics();
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             pen = new Pen(Color.Black,5);
+            pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         }
 
         
