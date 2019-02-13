@@ -47,6 +47,7 @@ namespace iPaint
 
         private void button1_Click(object sender, EventArgs e)
         {
+            pictureBox11.Image.Save("draw.png", System.Drawing.Imaging.ImageFormat.Png);
 
         }
 
@@ -66,6 +67,7 @@ namespace iPaint
             moving = true;
             x = e.X;
             y = e.Y;
+            pictureBox11.Cursor = Cursors.Cross;
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -73,6 +75,22 @@ namespace iPaint
             moving = false;
             x = -1;
             y = -1;
+            pictureBox11.Cursor = Cursors.Default;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);//to create bmp of same size as panel
+            pictureBox11.Image = (Image)bmp;
+            g = Graphics.FromImage(pictureBox11.Image);
+            button1_Click(null, null);
+
+
+        }
+
+        private void pictureBox11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
