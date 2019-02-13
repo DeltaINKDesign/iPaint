@@ -17,6 +17,7 @@ namespace iPaint
         int y = -1;
         bool moving = false;
         Pen pen;
+
         public Form1()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace iPaint
         {
          if(moving && x != -1 && y != -1)
             {
+
                 g.DrawLine(pen, new Point(x, y), e.Location);
                 x = e.X;
                 y = e.Y;
@@ -47,10 +49,12 @@ namespace iPaint
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox11.Image.Save("draw.png", System.Drawing.Imaging.ImageFormat.Png);
+            Bitmap bmp = new Bitmap(this.panel1.Width, this.panel1.Height);
 
+            this.panel1.DrawToBitmap(bmp, new Rectangle(0, 0, this.panel1.Width, this.panel1.Height));
+
+            bmp.Save("panel.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             PictureBox p = (PictureBox)sender;
@@ -67,7 +71,6 @@ namespace iPaint
             moving = true;
             x = e.X;
             y = e.Y;
-            pictureBox11.Cursor = Cursors.Cross;
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -75,22 +78,21 @@ namespace iPaint
             moving = false;
             x = -1;
             y = -1;
-            pictureBox11.Cursor = Cursors.Default;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);//to create bmp of same size as panel
-            pictureBox11.Image = (Image)bmp;
-            g = Graphics.FromImage(pictureBox11.Image);
-            button1_Click(null, null);
-
-
+            pen = new Pen(Color.Black, 3);
         }
 
-        private void pictureBox11_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            pen = new Pen(Color.Black, 10);
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            pen = new Pen(Color.Black, 28);
         }
     }
 }
